@@ -1,0 +1,3 @@
+name: OptimalGenerators V_1_8_R3
+version: ${project.version}
+main: me.aiglez.optimalgenerators.nms.v1_8_R3.OptimalNBT

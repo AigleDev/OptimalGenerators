@@ -1,0 +1,6 @@
+name: OptimalGenerators
+version: ${project.version}
+main: me.aiglez.optimalgenerators.OptimalGenerators
+prefix: OptimalGenerators
+authors: [AigleZ]
+description: The best Generator plugin ever made !

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.aiglez</groupId>
+    <artifactId>optimalgenerators-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>OptimalGenerators</name>
+
+    <description>The best generator plugin ever seen !</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>OptimalGenerators-Core</module>
+        <module>OptimalGenerators-API</module>
+        <!-- NMS MODULES -->
+        <module>OptimalGenerators-v1_8_R3</module>
+        <module>OptimalGenerators-v1_8_R1</module>
+        <module>OptimalGenerators-Libby</module>
+        <!-- END NMS MODULES -->
+    </modules>
+
+</project>
