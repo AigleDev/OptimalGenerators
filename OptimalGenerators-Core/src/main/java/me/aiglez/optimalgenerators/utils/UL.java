@@ -18,6 +18,12 @@ public class UL {
         instance.getServer().getConsoleSender().sendMessage("§3[OptimalGenerators - DEBUG] §f" + ML.tl(message));
     }
 
+    public static void log(String message) {
+        Validate.notNull(message, "message may not be null");
+
+        instance.getServer().getConsoleSender().sendMessage("§b[OptimalGenerators - LOG] §f" + ML.tl(message));
+    }
+
     public static void error(String message) {
         Validate.notNull(message, "message may not be null");
 

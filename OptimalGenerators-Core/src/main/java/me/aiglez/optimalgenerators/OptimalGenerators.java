@@ -1,16 +1,12 @@
 package me.aiglez.optimalgenerators;
 
 import me.aiglez.optimalgenerators.api.OptimalNBT;
-import me.aiglez.optimalgenerators.backend.Dependency;
 import me.aiglez.optimalgenerators.backend.Updater;
 import me.aiglez.optimalgenerators.backend.files.Configuration;
+import me.aiglez.optimalgenerators.libby.DependencyManager;
 import me.aiglez.optimalgenerators.utils.UL;
-import net.byteflux.libby.BukkitLibraryManager;
 import org.bukkit.Bukkit;
-
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Optional;
 
 
 public final class OptimalGenerators extends JavaPlugin implements me.aiglez.optimalgenerators.api.OptimalGenerators {
@@ -28,16 +24,15 @@ public final class OptimalGenerators extends JavaPlugin implements me.aiglez.opt
 
     @Override
     public void onLoad() {
-        BukkitLibraryManager loader = new BukkitLibraryManager(this);
-        Dependency libraries = new Dependency();
-        loader.addMavenCentral();
+        DependencyManager dependencyManager = new DependencyManager(this, getDataFolder().toPath());
 
+        dependencyManager.addMavenCentral();
         try {
             Class.forName("com.google.gson.Gson");
         } catch (ClassNotFoundException e) {
             System.out.println("[OptimalGenerators] [Dependency] GSON not found downloading it...");
             try {
-                libraries.downloadGSON(loader);
+                dependencyManager.loadGSON();
             } catch (RuntimeException ex) {
                 System.out.println("[OptimalGenerators] [Dependency] Couldn't download GSON...");
                 ex.printStackTrace();
@@ -53,7 +48,7 @@ public final class OptimalGenerators extends JavaPlugin implements me.aiglez.opt
         } catch (ClassNotFoundException e) {
             System.out.println("[OptimalGenerators] [Dependency] IOUtils (commons) not found downloading it...");
             try {
-                libraries.downloadIOUtils(loader);
+                dependencyManager.loadGSON();
             } catch (RuntimeException ex) {
                 System.out.println("[OptimalGenerators] [Dependency] Couldn't download IO Utils...");
                 ex.printStackTrace();
@@ -62,7 +57,6 @@ public final class OptimalGenerators extends JavaPlugin implements me.aiglez.opt
                 return;
             }
         }
-
         loaded = true;
     }
 
@@ -86,6 +80,8 @@ public final class OptimalGenerators extends JavaPlugin implements me.aiglez.opt
             UL.error("- CraftBukkit / Spigot (and other forks*)");
             System.out.println(" ");
             UL.error("- (*) Only if they don't beak Bukkit API.");
+            UL.error("Suggestions:");
+            UL.error("- We highly recommend you to switch to Paper or OptimalSpigot \n(OptimalSpigot is made by our team)");
             UL.error("----------------------------------------------");
             disable();
 
@@ -101,14 +97,7 @@ public final class OptimalGenerators extends JavaPlugin implements me.aiglez.opt
         UL.enabling("§e[!] Keep in mind this a dev build, do not use on production environments !");
         UL.enabling(String.format("&aOptimalGenerators fully loaded (took: %s) ...", (System.currentTimeMillis() - startMillis)));
 
-        UL.enabling("[Updater] Checking for updates...");
-        Optional<Updater.Update> update = Updater.getInstance().getUpdate(this);
-        if(!update.isPresent()) {
-            UL.error("[Updater] Error while checking for updates !");
-        } else {
-            Updater.Update u = update.get();
-
-        }
+        Updater.getInstance().checkUpdates();
 
     }
 

@@ -148,7 +148,10 @@ public class DependencyManager {
                     return null;
                 }
 
-                logger.info("[Dependency] Downloaded a dependency " + name + " (took: " + (System.currentTimeMillis() - start) + "ms");
+                if(!(name.equalsIgnoreCase("asm-commons") || name.equalsIgnoreCase("asm") || name.equalsIgnoreCase("jar-relocator"))) {
+                    logger.info("[Dependency] Successfully downloaded a dependency " + name + " (took: " + (System.currentTimeMillis() - start) + "ms");
+                }
+
                 return out.toByteArray();
             }
         } catch (MalformedURLException e) {
